@@ -9,12 +9,12 @@ public class Dice {
 
     public Dice() {
         try {
-            random = SecureRandom.getInstanceStrong():
+            random = SecureRandom.getInstanceStrong();
         } catch (Exception e){
             e.printStackTrace();
         }
     }
-    public void rolldice(){
+    public void rollDice(){
         value = random.nextInt(maxValue) + 1;
     }
     public Integer getValue() {

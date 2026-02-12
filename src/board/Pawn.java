@@ -7,10 +7,6 @@ public class Pawn {
         this.color = color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public Color getColor() {
         return color;
     }
@@ -23,6 +19,9 @@ public class Pawn {
         pos=rollvalue;
     }
     public void backward(int rollvalue) {
-        pos=rollvalue;
+        if (pos <= 0) pos = 0;
+        pos=pos - rollvalue;
+
     }
+
 }

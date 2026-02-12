@@ -1,4 +1,4 @@
-package testPackage;
+package test_package;
 
 import board.Dice;
 

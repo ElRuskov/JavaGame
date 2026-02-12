@@ -2,7 +2,15 @@ package board;
 
 public class Player {
     private String name;
-    private Boolean isStuck = false;
-    public Dice[] dice = new Dice[2];
-    // TODO
+    private boolean isStuck = false;
+    private Dice[] dice = new Dice[2];
+
+    public int roll(){
+        dice[0] = new Dice();
+        dice[1] = new Dice();
+        dice[0].rollDice();
+        dice[1].rollDice();
+
+        return dice[0].getValue() + dice[1].getValue();
+    }
 }

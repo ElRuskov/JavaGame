@@ -3,8 +3,8 @@ package board;
 import java.security.SecureRandom;
 
 public class Dice {
-    private Integer maxValue = 6;
-    private Integer value;
+    private int maxValue = 6;
+    private int value;
     private SecureRandom random;
 
     public Dice() {
@@ -17,8 +17,7 @@ public class Dice {
     public void rollDice(){
         value = random.nextInt(maxValue) + 1;
     }
-    public Integer getValue() {
+    public int getValue() {
         return value;
     }
-
 }

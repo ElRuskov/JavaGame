@@ -1,12 +1,13 @@
 package board;
-
 public class Player {
     public String name;
+    public Pawn pawn;
     private boolean isStuck = false;
     private Dice[] dice = new Dice[2];
 
-    public Player(String name) {
+    public Player(String name,Color color) {
         this.name = name;
+        this.pawn = new Pawn(color);
     }
 
     public int roll(){

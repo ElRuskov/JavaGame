@@ -19,9 +19,8 @@ public class Pawn {
         pos=rollvalue;
     }
     public void backward(int rollvalue) {
-        if (pos <= 0) pos = 0;
-        pos=pos - rollvalue;
-
+        if (pos - rollvalue < 0) pos = 0;
+        else pos -= rollvalue;
     }
 
 }

@@ -10,7 +10,6 @@ public class Pawn {
     public Color getColor() {
         return color;
     }
-
     public int getPos() {
         return pos;
     }

@@ -1,9 +1,13 @@
 package board;
 
 public class Player {
-    private String name;
+    public String name;
     private boolean isStuck = false;
     private Dice[] dice = new Dice[2];
+
+    public Player(String name) {
+        this.name = name;
+    }
 
     public int roll(){
         dice[0] = new Dice();

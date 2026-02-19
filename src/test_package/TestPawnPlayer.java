@@ -5,8 +5,8 @@ import board.Pawn;
 import board.Player;
 public class TestPawnPlayer {
     public static void main(String[] args) {
-        Player p1 = new Player();
-        Player p2 = new Player();
+        Player p1 = new Player("François");
+        Player p2 = new Player("David");
         int val1 = p1.roll();
         int val2 = p2.roll();
         Pawn pawn1 = new Pawn(Color.BLUE);
@@ -29,5 +29,8 @@ public class TestPawnPlayer {
 
         System.out.println("Pawn 1 pos After: " + pawn1.getPos());
         System.out.println("Pawn 2 pos After: " + pawn2.getPos());
+
+        System.out.println("P1 name: "+ p1.name);
+        System.out.println("P2 name: "+ p2.name);
     }
 }

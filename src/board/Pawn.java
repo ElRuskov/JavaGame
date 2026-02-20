@@ -1,4 +1,5 @@
 package board;
+
 public class Pawn {
     private Color color;
     private int pos = 0;
@@ -15,7 +16,7 @@ public class Pawn {
     }
 
     public void forward(int rollvalue) {
-        pos=rollvalue;
+        pos+=rollvalue;
     }
     public void backward(int rollvalue) {
         if (pos - rollvalue < 0) pos = 0;

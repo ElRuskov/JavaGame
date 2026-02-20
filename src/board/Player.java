@@ -1,4 +1,5 @@
 package board;
+
 public class Player {
     public String name;
     public Pawn pawn;

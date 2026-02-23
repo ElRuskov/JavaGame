@@ -19,4 +19,8 @@ public class Player {
 
         return dice[0].getValue() + dice[1].getValue();
     }
+
+    public boolean isStuck() {return isStuck;}
+
+    public void setStuck(boolean stuck) {isStuck = stuck;}
 }

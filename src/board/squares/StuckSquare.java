@@ -1,5 +1,29 @@
 package board.squares;
 
+import board.Color;
+import board.Player;
+import java.security.SecureRandom;
+
 public class StuckSquare {
-    //TODO
+    // TODO faire en sorte que la pos des case ne tombe pas au meme endroit
+    public Color colorSquare = Color.BLACK;
+    public int maxValue = 36;//TODO Taille Map a changer
+    public int posvalue;
+    public SecureRandom random;
+
+    public StuckSquare() {
+        try {
+            random = SecureRandom.getInstanceStrong();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        posvalue = random.nextInt(maxValue) + 1;
+    }
+
+    public void stuckEffect(Player player) {
+        player.setStuck(true);
+    }
+    public int getPosvalue() {
+        return posvalue;
+    }
 }

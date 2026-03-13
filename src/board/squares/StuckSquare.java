@@ -19,7 +19,7 @@ public class StuckSquare {
         }
         posvalue = random.nextInt(maxValue) + 1;
     }
-
+    public void unlock(Player player) {player.setStuck(false);}
     public void stuckEffect(Player player) {
         player.setStuck(true);
     }

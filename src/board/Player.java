@@ -5,7 +5,7 @@ public class Player {
     private Pawn pawn;
     private boolean isStuck = false;
     private Dice[] dice = new Dice[2];
-
+//TODO ajouter la vie meme si pas utiliser
     public Player(String name,Color color) {
         this.name = name;
         this.pawn = new Pawn(color);

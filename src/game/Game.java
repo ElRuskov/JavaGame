@@ -28,39 +28,39 @@ public class Game {
 
     }
     private void startTour(){
-
-        for (int i = 0; i < 2; i++) {
-            int valroll = currentPlayer[i].roll();
-            currentPlayer[i].forward(valroll);
-            System.out.println("Roll player "+currentPlayer[i].getName()+" Roll = "+valroll);
-        }
-        for (int i = 0; i < 2; i++) {
-            int posP = currentPlayer[i].getPos();
-            posPTab[i] = posP;
-            System.out.println("[TRACE postab ]"+posPTab[i]);
-            if (currentPlayer[i].isStuck()){
-                int valRollUnstuck1 = currentPlayer[i].roll();
-                int valRollUnstuck2 = currentPlayer[i].roll();
-                if (valRollUnstuck1 == valRollUnstuck2){
-                    stuckSquare[i].unlock(currentPlayer[i]);
-                    System.out.println(currentPlayer[i].getName()+" With color -> "+currentPlayer[i].getColor() + "Is unstuck ");
-                }
-            }
-        }
-
-        for (int j = 0; j < 2; j++) {
-            for (int k = 0; k < 2; k++) {
-                if (posPTab[j] == posStuckTab[k] ){
-                    System.out.println(currentPlayer[j].getName()+" With color -> "+currentPlayer[j].getColor() + "Is stuck into case -> "+posStuckTab[k]);
-                    stuckSquare[k].stuckEffect(currentPlayer[j]);
-                }
-            }
-        }
-        for (int i = 0; i < 2; i++) {
+        for (int l = 0; l < 2; l++) {
             int boardsize = 36;//TODO Taille Map a changer
-            if (posPTab[i] >= boardsize) {
-                System.out.println(currentPlayer[i].getName() + " With color -> " + currentPlayer[i].getColor() + " Win the game !");
+            if (posPTab[l] >= boardsize) {
+                System.out.println(currentPlayer[l].getName() + " With color -> " + currentPlayer[l].getColor() + " Win the game !");
                 gameOver = true;
+            }else {
+                for (int i = 0; i < 2; i++) {
+                    int valroll = currentPlayer[i].roll();
+                    currentPlayer[i].forward(valroll);
+                    System.out.println("Roll player "+currentPlayer[i].getName()+" Roll = "+valroll);
+                }
+                for (int i = 0; i < 2; i++) {
+                    int posP = currentPlayer[i].getPos();
+                    posPTab[i] = posP;
+                    System.out.println("[TRACE postab ]"+posPTab[i]);
+                    if (currentPlayer[i].isStuck()){
+                        int valRollUnstuck1 = currentPlayer[i].roll();
+                        int valRollUnstuck2 = currentPlayer[i].roll();
+                        if (valRollUnstuck1 == valRollUnstuck2){
+                            stuckSquare[i].unlock(currentPlayer[i]);
+                            System.out.println(currentPlayer[i].getName()+" With color -> "+currentPlayer[i].getColor() + "Is unstuck ");
+                        }
+                    }
+                }
+
+                for (int j = 0; j < 2; j++) {
+                    for (int k = 0; k < 2; k++) {
+                        if (posPTab[j] == posStuckTab[k] ){
+                            System.out.println(currentPlayer[j].getName()+" With color -> "+currentPlayer[j].getColor() + "Is stuck into case -> "+posStuckTab[k]);
+                            stuckSquare[k].stuckEffect(currentPlayer[j]);
+                        }
+                    }
+                }
             }
         }
     }

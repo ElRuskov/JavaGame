@@ -3,7 +3,7 @@ package board.squares;
 import board.Color;
 
 public class DolphinSquare {
-    public Color colorSquare = Color.ORANGE;
+    private Color colorSquare = Color.ORANGE;
 
     public void speedEffect(){
         //TODO

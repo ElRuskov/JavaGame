@@ -6,10 +6,10 @@ import java.security.SecureRandom;
 
 public class StuckSquare {
     // TODO faire en sorte que la pos des case ne tombe pas au meme endroit
-    public Color colorSquare = Color.BLACK;
-    public int maxValue = 36;//TODO Taille Map a changer
-    public int posvalue;
-    public SecureRandom random;
+    private Color colorSquare = Color.BLACK;
+    private int maxValue = 36;//TODO Taille Map a changer
+    private int posvalue;
+    private SecureRandom random;
 
     public StuckSquare() {
         try {
@@ -18,6 +18,10 @@ public class StuckSquare {
             e.printStackTrace();
         }
         posvalue = random.nextInt(maxValue) + 1;
+    }
+
+    public Color getColorSquare() {
+        return colorSquare;
     }
     public void unlock(Player player) {player.setStuck(false);}
     public void stuckEffect(Player player) {

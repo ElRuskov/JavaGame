@@ -1,8 +1,8 @@
 package board;
 
 public class Player {
-    public String name;
-    public Pawn pawn;
+    private String name;
+    private Pawn pawn;
     private boolean isStuck = false;
     private Dice[] dice = new Dice[2];
 
@@ -12,15 +12,27 @@ public class Player {
     }
 
     public int roll(){
-        dice[0] = new Dice();
-        dice[1] = new Dice();
-        dice[0].rollDice();
-        dice[1].rollDice();
+        for(int i = 0;i<dice.length;i++){
+            dice[i] = new Dice();
+            dice[i].rollDice();
+        }
 
-        return dice[0].getValue() + dice[1].getValue();
+        return dice[0].getValue()-1 + dice[1].getValue()-1;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public boolean isStuck() {return isStuck;}
 
     public void setStuck(boolean stuck) {isStuck = stuck;}
+
+    public int getPos(){ return pawn.getPos(); }
+
+    public Color getColor(){ return pawn.getColor(); }
+
+    public void forward(int rollvalue){ pawn.forward(rollvalue);}
+
+    public void backward(int rollvalue){ pawn.backward(rollvalue);}
 }

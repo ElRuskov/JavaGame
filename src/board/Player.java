@@ -38,8 +38,6 @@ public class Player {
 
     public void forward(int rollvalue) { pawn.forward(rollvalue); }
 
-    public void backward(int rollvalue) { pawn.backward(rollvalue); }
-
     public int getLife() { return life; }
 
     public int getDolphinTurns() { return dolphinTurns; }

@@ -27,6 +27,25 @@ public class Game {
         display.showStuckSquares(posStuckTab);
     }
 
+    private void tryUnlock(Player player) {
+        for (int k = 0; k < stuckSquares.length; k++) {
+            if (player.getPos() == posStuckTab[k]) {
+                stuckSquares[k].unlock(player);
+                return;
+            }
+        }
+    }
+
+    private void checkStuckSquare(Player player) {
+        for (int k = 0; k < stuckSquares.length; k++) {
+            if (player.getPos() == posStuckTab[k]) {
+                stuckSquares[k].stuckEffect(player);
+                display.showStuck(player, posStuckTab[k]);
+                return;
+            }
+        }
+    }
+
     private void playTurn(int playerIndex) {
         Player player = players[playerIndex];
         display.showTurnHeader(player);
@@ -35,12 +54,7 @@ public class Game {
             int roll1 = player.roll();
             int roll2 = player.roll();
             if (roll1 == roll2) {
-                for (int k = 0; k < stuckSquares.length; k++) {
-                    if (player.getPos() == posStuckTab[k]) {
-                        stuckSquares[k].unlock(player);
-                        break;
-                    }
-                }
+                tryUnlock(player);
                 display.showUnstuck(player);
             } else {
                 display.showStuckFail(player, roll1, roll2);
@@ -48,7 +62,7 @@ public class Game {
             }
         }
 
-        int rollValue = Math.max(player.roll(), 1);
+        int rollValue = player.roll();
         player.forward(rollValue);
         display.showRoll(player, rollValue);
         display.showPosition(player, player.getPos(), boardSize);
@@ -59,19 +73,13 @@ public class Game {
             return;
         }
 
-        for (int k = 0; k < stuckSquares.length; k++) {
-            if (player.getPos() == posStuckTab[k]) {
-                stuckSquares[k].stuckEffect(player);
-                display.showStuck(player, posStuckTab[k]);
-                break;
-            }
-        }
+        checkStuckSquare(player);
     }
 
     private void startTour() {
         display.showRoundHeader();
         for (int i = 0; i < players.length; i++) {
-            if (gameOver) break;
+            if (gameOver) return;
             playTurn(i);
         }
         if (!gameOver) display.waitForEnter();

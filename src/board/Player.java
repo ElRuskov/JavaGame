@@ -18,7 +18,7 @@ public class Player {
             dice[i].rollDice();
         }
 
-        return dice[0].getValue()-1 + dice[1].getValue()-1;
+        return dice[0].getValue() + dice[1].getValue();
     }
 
     public String getName() {

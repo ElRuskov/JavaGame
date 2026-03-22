@@ -6,7 +6,7 @@ public interface IDisplay {
 
     void showWelcome();
 
-    String askName(int playerNumber);
+    String askName(int playerNumber, String defaultName);
 
     void showRoundHeader();
 

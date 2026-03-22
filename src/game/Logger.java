@@ -10,14 +10,23 @@ public class Logger implements IDisplay {
 
     @Override
     public void showWelcome() {
-        System.out.println("=== Welcome to the game! ===");
+        System.out.println("=== The Pirates' Game ===");
+        System.out.println("\nJack Le Borgne and Bill Jambe de Bois, stranded on a desert island, race to find the only hidden rowboat to claim captaincy of 'Le Sanguinaire'.\nRoll 2 dice, move your pawn (RED: Jack, BLUE: Bill) across 30 squares — first to reach square 30 wins!");
+        System.out.println("\nJack Le Borgne et Bill Jambe de Bois, échoués sur une île déserte, cherchent la seule barque cachée pour prendre le commandement du « Sanguinaire ».\nLancez 2 dés, avancez votre pion (ROUGE : Jack, BLEU : Bill) sur 30 cases — le premier à atteindre la case 30 gagne !");
+        System.out.println("\n(Press Enter to keep the default pirate name)");
+        System.out.println();
     }
 
     @Override
-    public String askName(int playerNumber) {
-        System.out.print("Player " + playerNumber + " name: ");
+    public String askName(int playerNumber, String defaultName) {
+        System.out.print("Enter name [" + defaultName + "]: ");
         String name = scanner.nextLine().trim();
-        return name.isEmpty() ? "Player " + playerNumber : name;
+
+        if (name.isEmpty()) {
+            return defaultName;
+        } else {
+            return name;
+        }
     }
 
     @Override

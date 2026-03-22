@@ -16,8 +16,8 @@ public class Game {
         this.display = display;
 
         display.showWelcome();
-        players[0] = new Player(display.askName(1), Color.RED);
-        players[1] = new Player(display.askName(2), Color.BLUE);
+        players[0] = new Player(display.askName(1, "Jack Le Borne"), Color.RED);
+        players[1] = new Player(display.askName(2, "Bill Jambe de Bois"), Color.BLUE);
 
         for (int i = 0; i < stuckSquares.length; i++) {
             stuckSquares[i] = new StuckSquare(boardSize);

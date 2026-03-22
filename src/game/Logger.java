@@ -1,5 +1,79 @@
 package game;
 
-public class Logger {
-    //TODO
+import board.Player;
+
+import java.util.Scanner;
+
+public class Logger implements IDisplay {
+
+    private final Scanner scanner = new Scanner(System.in);
+
+    @Override
+    public void showWelcome() {
+        System.out.println("=== Welcome to the game! ===");
+    }
+
+    @Override
+    public String askName(int playerNumber) {
+        System.out.print("Player " + playerNumber + " name: ");
+        String name = scanner.nextLine().trim();
+        return name.isEmpty() ? "Player " + playerNumber : name;
+    }
+
+    @Override
+    public void showRoundHeader() {
+        System.out.println("\n===== ROUND =====");
+    }
+
+    @Override
+    public void showTurnHeader(Player player) {
+        System.out.println("\n--- " + player.getName() + "'s turn [" + player.getColor() + "] ---");
+    }
+
+    @Override
+    public void showWinner(Player player) {
+        System.out.println("🏆 " + player.getName() + " [" + player.getColor() + "] wins the game!");
+        System.out.println("[ with " + player.getLife() + " HP ]");
+    }
+
+    @Override
+    public void showRoll(Player player, int rollValue) {
+        System.out.println(player.getName() + " rolled -> " + rollValue);
+    }
+
+    @Override
+    public void showPosition(Player player, int position, int boardSize) {
+        System.out.println("[TRACE] " + player.getName() + " is at position " + position + "/" + boardSize);
+    }
+
+    @Override
+    public void showUnstuck(Player player) {
+        System.out.println("✅ " + player.getName() + " [" + player.getColor() + "] is now unstuck!");
+    }
+
+    @Override
+    public void showStuck(Player player, int squarePosition) {
+        System.out.println("⛔ " + player.getName() + " [" + player.getColor() + "] is stuck on square " + squarePosition);
+    }
+
+    @Override
+    public void showStuckFail(Player player, int roll1, int roll2) {
+        System.out.println("❌ " + player.getName() + " tried to get unstuck (" + roll1 + " | " + roll2 + ") — failed, turn lost!");
+    }
+
+    @Override
+    public void showStuckSquares(int[] positions) {
+        System.out.print("[TRACE] Stuck squares generated at positions: ");
+        for (int i = 0; i < positions.length; i++) {
+            System.out.print(positions[i]);
+            if (i < positions.length - 1) System.out.print(", ");
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void waitForEnter() {
+        System.out.print("[ Press Enter to continue... ]");
+        scanner.nextLine();
+    }
 }

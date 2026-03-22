@@ -5,7 +5,8 @@ public class Player {
     private Pawn pawn;
     private boolean isStuck = false;
     private Dice[] dice = new Dice[2];
-//TODO ajouter la vie meme si pas utiliser
+    private int life = 100;
+
     public Player(String name,Color color) {
         this.name = name;
         this.pawn = new Pawn(color);
@@ -35,4 +36,6 @@ public class Player {
     public void forward(int rollvalue){ pawn.forward(rollvalue);}
 
     public void backward(int rollvalue){ pawn.backward(rollvalue);}
+
+    public int getLife(){return life;}
 }

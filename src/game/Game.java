@@ -5,72 +5,79 @@ import board.Player;
 import board.squares.StuckSquare;
 
 public class Game {
-    private boolean gameOver;
-    private Player[] currentPlayer = new Player[2];
-    private StuckSquare[] stuckSquare = new StuckSquare[2];
-    private int [] posPTab = new int[2];
-    private int [] posStuckTab = new int[2];
+    private int boardSize = 36;
+    private boolean gameOver = false;
+    private Player[] players = new Player[2];
+    private StuckSquare[] stuckSquares = new StuckSquare[2];
+    private int[] posStuckTab = new int[2];
+    private IDisplay display;
 
+    public Game(IDisplay display) {
+        this.display = display;
 
-    public Game(){
-        currentPlayer[0] = new Player("Esquie",Color.RED);
-        currentPlayer[1] = new Player("François",Color.BLUE);
-        for (int i = 0; i < 2; i++) {
-            posPTab[i] = 0;
-            posStuckTab[i] = 0;
+        display.showWelcome();
+        players[0] = new Player(display.askName(1), Color.RED);
+        players[1] = new Player(display.askName(2), Color.BLUE);
 
+        for (int i = 0; i < stuckSquares.length; i++) {
+            stuckSquares[i] = new StuckSquare(boardSize);
+            posStuckTab[i] = stuckSquares[i].getPosvalue();
         }
 
-        for (int i = 0; i < 2; i++) {
-            stuckSquare[i] = new StuckSquare();
-            posStuckTab[i] = stuckSquare[i].getPosvalue();
-        }
-
+        display.showStuckSquares(posStuckTab);
     }
-    private void startTour(){
-        for (int l = 0; l < 2; l++) {
-            int boardsize = 36;//TODO Taille Map a changer
-            if (posPTab[l] >= boardsize) {
-                System.out.println(currentPlayer[l].getName() + " With color -> " + currentPlayer[l].getColor() + " Win the game !");
-                gameOver = true;
-            }else {
-                for (int i = 0; i < 2; i++) {
-                    int valroll = currentPlayer[i].roll();
-                    currentPlayer[i].forward(valroll);
-                    System.out.println("Roll player "+currentPlayer[i].getName()+" Roll = "+valroll);
-                }
-                for (int i = 0; i < 2; i++) {
-                    int posP = currentPlayer[i].getPos();
-                    posPTab[i] = posP;
-                    System.out.println("[TRACE postab ]"+posPTab[i]);
-                    if (currentPlayer[i].isStuck()){
-                        int valRollUnstuck1 = currentPlayer[i].roll();
-                        int valRollUnstuck2 = currentPlayer[i].roll();
-                        if (valRollUnstuck1 == valRollUnstuck2){
-                            stuckSquare[i].unlock(currentPlayer[i]);
-                            System.out.println(currentPlayer[i].getName()+" With color -> "+currentPlayer[i].getColor() + "Is unstuck ");
-                        }
-                    }
-                }
 
-                for (int j = 0; j < 2; j++) {
-                    for (int k = 0; k < 2; k++) {
-                        if (posPTab[j] == posStuckTab[k] ){
-                            System.out.println(currentPlayer[j].getName()+" With color -> "+currentPlayer[j].getColor() + "Is stuck into case -> "+posStuckTab[k]);
-                            stuckSquare[k].stuckEffect(currentPlayer[j]);
-                        }
+    private void playTurn(int playerIndex) {
+        Player player = players[playerIndex];
+        display.showTurnHeader(player);
+
+        if (player.isStuck()) {
+            int roll1 = player.roll();
+            int roll2 = player.roll();
+            if (roll1 == roll2) {
+                for (int k = 0; k < stuckSquares.length; k++) {
+                    if (player.getPos() == posStuckTab[k]) {
+                        stuckSquares[k].unlock(player);
+                        break;
                     }
                 }
+                display.showUnstuck(player);
+            } else {
+                display.showStuckFail(player, roll1, roll2);
+                return;
+            }
+        }
+
+        int rollValue = Math.max(player.roll(), 1);
+        player.forward(rollValue);
+        display.showRoll(player, rollValue);
+        display.showPosition(player, player.getPos(), boardSize);
+
+        if (player.getPos() >= boardSize) {
+            display.showWinner(player);
+            gameOver = true;
+            return;
+        }
+
+        for (int k = 0; k < stuckSquares.length; k++) {
+            if (player.getPos() == posStuckTab[k]) {
+                stuckSquares[k].stuckEffect(player);
+                display.showStuck(player, posStuckTab[k]);
+                break;
             }
         }
     }
 
-    public void runGame(){
-        while(!gameOver){
-            startTour();
-            System.out.println("TOUR");
-
+    private void startTour() {
+        display.showRoundHeader();
+        for (int i = 0; i < players.length; i++) {
+            if (gameOver) break;
+            playTurn(i);
         }
+        if (!gameOver) display.waitForEnter();
     }
 
+    public void runGame() {
+        while (!gameOver) startTour();
+    }
 }

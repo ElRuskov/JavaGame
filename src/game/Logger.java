@@ -1,5 +1,6 @@
 package game;
 
+import board.Color;
 import board.Player;
 
 import java.util.Scanner;
@@ -61,8 +62,8 @@ public class Logger implements IDisplay {
     }
 
     @Override
-    public void showStuck(Player player, int squarePosition) {
-        System.out.println("⛔ " + player.getName() + " [" + player.getColor() + "] is stuck on square " + squarePosition);
+    public void showStuck(Player player, int squarePosition, Color squareColor) {
+        System.out.println("⛔ " + player.getName() + " [" + player.getColor() + "] is stuck on square " + squarePosition + " [" + squareColor + "]");
     }
 
     @Override
@@ -71,13 +72,33 @@ public class Logger implements IDisplay {
     }
 
     @Override
-    public void showStuckSquares(int[] positions) {
-        System.out.print("[TRACE] Stuck squares generated at positions: ");
+    public void showStuckSquares(int[] positions, Color squareColor) {
+        System.out.print("[TRACE] Stuck squares [" + squareColor + "] generated at positions: ");
         for (int i = 0; i < positions.length; i++) {
             System.out.print(positions[i]);
             if (i < positions.length - 1) System.out.print(", ");
         }
         System.out.println();
+    }
+
+    @Override
+    public void showDolphinSquares(int[] positions, Color squareColor) {
+        System.out.print("[TRACE] Dolphin squares [" + squareColor + "] generated at positions: ");
+        for (int i = 0; i < positions.length; i++) {
+            System.out.print(positions[i]);
+            if (i < positions.length - 1) System.out.print(", ");
+        }
+        System.out.println();
+    }
+
+    @Override
+    public void showDolphin(Player player, int squarePosition, Color squareColor) {
+        System.out.println("🐬 " + player.getName() + " landed on a dolphin square " + squarePosition + " [" + squareColor + "]! Dice doubled for 3 turns.");
+    }
+
+    @Override
+    public void showDolphinActive(Player player) {
+        System.out.println("🐬 " + player.getName() + " has dolphin boost active (" + player.getDolphinTurns() + " turns left).");
     }
 
     @Override

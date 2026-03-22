@@ -4,6 +4,7 @@ public class Player {
     private String name;
     private Pawn pawn;
     private boolean isStuck = false;
+    private int dolphinTurns = 0;
     private Dice[] dice = new Dice[2];
     private int life = 5;
 
@@ -17,7 +18,12 @@ public class Player {
             dice[i] = new Dice();
             dice[i].rollDice();
         }
-        return dice[0].getValue() + dice[1].getValue();
+        int result = dice[0].getValue() + dice[1].getValue();
+        if (dolphinTurns > 0) {
+            result *= 2;
+            dolphinTurns--;
+        }
+        return result;
     }
 
     public String getName() { return name; }
@@ -35,4 +41,8 @@ public class Player {
     public void backward(int rollvalue) { pawn.backward(rollvalue); }
 
     public int getLife() { return life; }
+
+    public int getDolphinTurns() { return dolphinTurns; }
+
+    public void setDolphinTurns(int turns) { dolphinTurns = turns; }
 }

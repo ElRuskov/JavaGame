@@ -1,5 +1,6 @@
 package game;
 
+import board.Color;
 import board.Player;
 
 public interface IDisplay {
@@ -18,13 +19,19 @@ public interface IDisplay {
 
     void showUnstuck(Player player);
 
-    void showStuck(Player player, int squarePosition);
+    void showStuck(Player player, int squarePosition, Color squareColor);
 
     void showStuckFail(Player player, int roll1, int roll2);
 
     void showTurnHeader(Player player);
 
-    void showStuckSquares(int[] positions);
+    void showStuckSquares(int[] positions, Color squareColor);
+
+    void showDolphinSquares(int[] positions, Color squareColor);
+
+    void showDolphin(Player player, int squarePosition, Color squareColor);
+
+    void showDolphinActive(Player player);
 
     void waitForEnter();
 }

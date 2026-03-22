@@ -5,7 +5,7 @@ public class Player {
     private Pawn pawn;
     private boolean isStuck = false;
     private Dice[] dice = new Dice[2];
-    private int life = 100;
+    private int life = 5;
 
     public Player(String name,Color color) {
         this.name = name;

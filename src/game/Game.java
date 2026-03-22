@@ -5,7 +5,7 @@ import board.Player;
 import board.squares.StuckSquare;
 
 public class Game {
-    private int boardSize = 36;
+    private int boardSize = 30;
     private boolean gameOver = false;
     private Player[] players = new Player[2];
     private StuckSquare[] stuckSquares = new StuckSquare[2];
